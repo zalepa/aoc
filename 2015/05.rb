@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
+# a string
 class String
   def naughty_or_nice
-    return false if self.match(/ab|cd|pq|xy/)
-    self.chars.select { _1 if _1 =~ /[aeiou]/ }.count > 2 && 
-    !self.match(/(\w)\1/).nil?
+    return false if match(/ab|cd|pq|xy/)
+
+    chars.select { _1 if _1 =~ /[aeiou]/ }.count > 2 && !match(/(\w)\1/).nil?
   end
 
   def improved_naughty_or_nice
-    !self.match(/(\w\w).*\1/).nil? && !self.match(/(\w).{1}\1/).nil?
-    
+    !match(/(\w\w).*\1/).nil? && !match(/(\w).{1}\1/).nil?
   end
 end
 
@@ -18,7 +20,7 @@ end
 # puts "haegwjzuvuyypxyu".naughty_or_nice
 # puts "dvszwmarrgswjxmb".naughty_or_nice
 
-cnt = File.readlines('05.txt').map { _1.naughty_or_nice }.filter { _1 }.count
+cnt = File.readlines('05.txt').map(&:naughty_or_nice).filter { _1 }.count
 puts 'Part A:', cnt
 
 # Test cases
@@ -27,5 +29,5 @@ puts 'Part A:', cnt
 # puts 'uurcxstgmygtbstg'.improved_naughty_or_nice
 # puts 'ieodomkazucvgmuy'.improved_naughty_or_nice
 
-cnt = File.readlines('05.txt').map { _1.improved_naughty_or_nice }.filter { _1 }.count
-puts 'Part A:', cnt
+cnt = File.readlines('05.txt').map(&:improved_naughty_or_nice).filter { _1 }.count
+puts 'Part B:', cnt
